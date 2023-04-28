@@ -1,1 +1,19 @@
-
+spring:
+  datasource:
+    url: jdbc:mariadb://correct-ing.cqfifksuvrnp.ap-northeast-2.rds.amazonaws.com:3306/merlins?serverTimezone=Asia/Seoul&useLegacyDatetimeCode=false&rewriteBatchedStatements=true
+    username: admin
+    password: admin11!
+    driver-class-name: org.mariadb.jdbc.Driver
+    hikari:
+      minimum-idle: 50
+      maximumPoolSize: 200
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        jdbc:
+          batch_size: 1000
+    open-in-view: false
