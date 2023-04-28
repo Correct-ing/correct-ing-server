@@ -17,3 +17,7 @@ spring:
         jdbc:
           batch_size: 1000
     open-in-view: false
+
+
+jwt:
+  secret: 9cbb3605dd40d39e01f1dasdb071a160b41c6a5fa4f1c0ef665821545435b28a0159bd6f446d45fe9d58732b93abc2ff73f152b1cfba04f3ecb5549206c79922
