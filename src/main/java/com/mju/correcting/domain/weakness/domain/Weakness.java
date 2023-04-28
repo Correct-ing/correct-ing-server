@@ -23,13 +23,13 @@ public class Weakness extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column
+    @Column(length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
     private WeaknessType weaknessType;
 
-    @Column
+    @Column(length = 50, nullable = false)
     private String wrongSentence;
 
-    @Column
+    @Column(length = 50, nullable = false)
     private String correctSentence;
 }

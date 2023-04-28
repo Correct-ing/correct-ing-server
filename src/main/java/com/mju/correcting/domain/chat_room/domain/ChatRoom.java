@@ -29,9 +29,10 @@ public class ChatRoom extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(length = 50, nullable = false)
     private String name;
 
-    @Column
+    @Column(length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
     private Interest interest;
 

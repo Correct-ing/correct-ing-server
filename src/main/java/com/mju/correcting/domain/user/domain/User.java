@@ -33,7 +33,7 @@ public class User extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private Interest interest;
 
-    @Column(nullable = false)
+    @Column(length = 40, nullable = false)
     private String email;
 
     @Column(length = 20, name = "phone_number")

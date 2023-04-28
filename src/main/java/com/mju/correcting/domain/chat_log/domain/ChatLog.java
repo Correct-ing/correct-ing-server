@@ -23,7 +23,9 @@ public class ChatLog extends BaseEntity {
     @JoinColumn(name = "chat_room_id")
     private ChatRoom chatRoom;
 
+    @Column(length = 300, nullable = false)
     private String question;
 
+    @Column(length = 300, nullable = false)
     private String answer;
 }

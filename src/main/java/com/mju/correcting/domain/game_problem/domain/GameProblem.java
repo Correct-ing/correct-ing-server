@@ -23,9 +23,9 @@ public class GameProblem extends BaseEntity {
     @JoinColumn(name = "game_id")
     private Game game;
 
-    @Column
+    @Column(length = 30, nullable = false)
     private String problem;
 
-    @Column
+    @Column(length = 30, nullable = false)
     private String answer;
 }

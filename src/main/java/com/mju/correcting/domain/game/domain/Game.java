@@ -22,11 +22,11 @@ public class Game extends BaseEntity{
     @Id
     private Long id;
 
-    @Column
+    @Column(length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     private GameType gameType;
 
-    @Column
+    @Column(length = 30, nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
