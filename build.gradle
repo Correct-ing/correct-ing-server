@@ -54,3 +54,8 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// CICD를 위해 jar 비활성화
+jar{
+	enabled = false
+}
