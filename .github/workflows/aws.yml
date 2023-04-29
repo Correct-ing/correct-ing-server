@@ -17,7 +17,7 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v3.3.0
         with:
-          java-version: 11
+          java-version: 17
           distribution: corretto
 
       - name: Grant execute permission for gradlew
@@ -71,8 +71,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: trendz
-          environment_name: dev-trendz
+          application_name: correcting
+          environment_name: correcting-env
           version_label: github-action-${{steps.current-time.outputs.formattedTime}}
           region: ap-northeast-2
           deployment_package: deploy/deploy.zip
@@ -81,8 +81,8 @@ jobs:
       - name: Delete untagged images in Amazon ECR Registry
         id: delete-untagged-images
         env:
-          ECR_REGION: ap-northeast-1
-          ECR_REPOSITORY: dev-trendz
+          ECR_REGION: ap-northeast-2
+          ECR_REPOSITORY: correcting
         run: |
           IMAGES_TO_DELETE=$( aws ecr list-images --region $ECR_REGION --repository-name $ECR_REPOSITORY --filter "tagStatus=UNTAGGED" --query 'imageIds[*]' --output json )
           aws ecr batch-delete-image --region $ECR_REGION --repository-name $ECR_REPOSITORY --image-ids "$IMAGES_TO_DELETE" || true
