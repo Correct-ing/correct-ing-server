@@ -12,7 +12,7 @@ import org.hibernate.annotations.Where;
 @NoArgsConstructor( access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Where(clause = "status='ACTIVE'")
-@Entity(name = "user")
+@Entity
 public class RefreshToken {
 
     @Id
