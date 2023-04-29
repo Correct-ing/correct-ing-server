@@ -1,5 +1,7 @@
 package com.mju.correcting.global.jwt;
 
+import com.mju.correcting.global.common.error.BaseCode;
+import com.mju.correcting.global.common.exception.CustomException;
 import com.mju.correcting.global.jwt.dto.TokenDto;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -73,7 +75,7 @@ public class TokenProvider {
         Claims claims = parserClaims(accessToken);
 
         if (claims.get(AUTHORITIES_KEY) == null) {
-            //todo: 예외처리
+            throw new CustomException(BaseCode.WITHOUT_AUTHORIZATION_TOKEN);
         }
 
         // 클레임에서 권한 정보 가져오기
