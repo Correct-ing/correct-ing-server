@@ -5,7 +5,7 @@ import com.mju.correcting.domain.refresh_token.repository.RefreshTokenRepository
 import com.mju.correcting.domain.user.domain.User;
 import com.mju.correcting.domain.user.dto.LoginRes;
 import com.mju.correcting.domain.user.dto.LoginUserReq;
-import com.mju.correcting.domain.user.dto.PostUserDto;
+import com.mju.correcting.domain.user.dto.PostUserReq;
 import com.mju.correcting.domain.user.dto.TokenReq;
 import com.mju.correcting.domain.user.repository.UserRepository;
 import com.mju.correcting.global.common.error.BaseCode;
@@ -33,21 +33,21 @@ public class UserService {
      * 회원가입
      * */
     @Transactional
-    public Long signup(PostUserDto postUserDto) {
+    public Long signup(PostUserReq postUserReq) {
 
         // 아이디 중복 확인
-        userRepository.findByUsername(postUserDto.getId())
+        userRepository.findByUsername(postUserReq.getId())
                 .ifPresent(exists -> {
                     throw new CustomException(BaseCode.EXISTS_USERNAME);
                 });
 
         // 패스워드 암호화
-        String encodePassword = passwordEncoder.encode(postUserDto.getPassword());
+        String encodePassword = passwordEncoder.encode(postUserReq.getPassword());
 
         return userRepository.save(User.builder()
-                .username(postUserDto.getId())
+                .username(postUserReq.getId())
                 .password(encodePassword)
-                .email(postUserDto.getEmail())
+                .email(postUserReq.getEmail())
                 .build()).getId();
 
     }

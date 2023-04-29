@@ -2,7 +2,7 @@ package com.mju.correcting.domain.user.controller;
 
 import com.mju.correcting.domain.user.dto.LoginRes;
 import com.mju.correcting.domain.user.dto.LoginUserReq;
-import com.mju.correcting.domain.user.dto.PostUserDto;
+import com.mju.correcting.domain.user.dto.PostUserReq;
 import com.mju.correcting.domain.user.dto.TokenReq;
 import com.mju.correcting.domain.user.service.UserService;
 import com.mju.correcting.global.jwt.dto.TokenDto;
@@ -25,8 +25,8 @@ public class UserController {
      * 회원가입
      * */
     @PostMapping("")
-    public ResponseEntity<String> signup(@RequestBody PostUserDto postUserDto) {
-        return ResponseEntity.created(URI.create("/api/v1/users/"+userService.signup(postUserDto))).build();
+    public ResponseEntity<String> signup(@RequestBody PostUserReq postUserReq) {
+        return ResponseEntity.created(URI.create("/api/v1/users/"+userService.signup(postUserReq))).build();
     }
 
     /*
