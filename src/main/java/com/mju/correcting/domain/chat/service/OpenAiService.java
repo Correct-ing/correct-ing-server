@@ -34,7 +34,7 @@ public class OpenAiService {
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.set("Authorization", "Bearer " + API_KEY);
 
-        StringBuilder messagesJson = new StringBuilder("[");
+        StringBuffer messagesJson = new StringBuffer("[");
         for (int i = 0; i < previousMessages.size(); i++) {
             messagesJson.append("{\"role\": \"user\", \"content\": \"")
                     .append(previousMessages.get(i))

@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  nginx-proxy:
+    image: nginx:1.21.3
+    container_name: nginx-proxy
+    ports:
+      - "80:80/tcp"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - nginx-proxy
+    depends_on:
+      - app
+
+  app:
+    image: 373805493124.dkr.ecr.ap-northeast-2.amazonaws.com/correcting:correcting
+    container_name: correcting
+# local test
+#    build:
+#      context: .
+#      dockerfile: ./dockerfile
+    expose:
+      - "8080"
+    stdin_open: true
+    tty: true
+    networks:
+      - nginx-proxy
+
+networks:
+    nginx-proxy:
+        driver: bridge
