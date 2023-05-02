@@ -6,6 +6,7 @@ import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,6 +31,7 @@ public class SpringDocConfig {
     @Bean
     public OpenAPI springShopOpenAPI() {
         return new OpenAPI()
+                .addServersItem(new Server().url("http://correcting-env.eba-harr53pi.ap-northeast-2.elasticbeanstalk.com"))
                 .info(new Info().title("Correct-ing API")
                         .description("Correct-ing application")
                         .version("v0.0.1")
