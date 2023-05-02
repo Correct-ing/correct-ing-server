@@ -49,6 +49,9 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
+                .requestMatchers( "/api/v1/users/login").permitAll()
+                .requestMatchers( "/api/v1/users/**/exists").permitAll()
+                .requestMatchers( "/api/v1/users/token").permitAll()
                 .requestMatchers("/api/v1/**").hasRole("USER")
                 .anyRequest().permitAll()
 

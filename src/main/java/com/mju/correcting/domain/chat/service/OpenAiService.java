@@ -21,8 +21,6 @@ public class OpenAiService {
 
         // 프롬프트 설정 + 이전 대화 상황
         List<String> previousMessages = new ArrayList<>();
-        String p = "We are engaged in a conversation in English within a set context. Please correct any incorrect English expressions and say '대화 상황에 맞는 입력을 해주세요' if I get off from context";
-        previousMessages.add(p);
 
         // 영어 필터링
         if (!isEnglish(prompt)) {

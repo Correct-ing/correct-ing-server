@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/chat")
+@RequestMapping("/completion")
 @RestController
 public class ChatController {
 
