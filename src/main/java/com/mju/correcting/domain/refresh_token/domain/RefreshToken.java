@@ -1,6 +1,7 @@
 package com.mju.correcting.domain.refresh_token.domain;
 
 
+import com.mju.correcting.global.common.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -13,7 +14,7 @@ import org.hibernate.annotations.Where;
 @AllArgsConstructor
 @Where(clause = "status='ACTIVE'")
 @Entity
-public class RefreshToken {
+public class RefreshToken extends BaseEntity {
 
     @Id
     @Column(name = "rt_key")
