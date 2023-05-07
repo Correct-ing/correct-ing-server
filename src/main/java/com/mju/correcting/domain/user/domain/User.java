@@ -39,7 +39,7 @@ public class User extends BaseEntity implements UserDetails {
     private Interest interest;
 
     @Column(length = 40, nullable = false)
-    private String email;
+    private String name;
 
     @Column(length = 20, name = "phone_number")
     private String phoneNumber;

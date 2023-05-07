@@ -49,7 +49,7 @@ public class UserService {
         return userRepository.save(User.builder()
                 .username(postUserReq.getId())
                 .password(encodePassword)
-                .email(postUserReq.getEmail())
+                .name(postUserReq.getName())
                 .roles(Collections.singletonList("ROLE_USER"))
                 .build()).getId();
 
@@ -92,6 +92,7 @@ public class UserService {
                 .accessTokenExpiresIn(token.getAccessTokenExpiresIn())
                 .grantType(token.getGrantType())
                 .userId(user.getId())
+                .name(user.getName())
                 .build();
     }
 

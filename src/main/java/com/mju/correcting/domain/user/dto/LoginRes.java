@@ -12,12 +12,15 @@ public class LoginRes {
     private String refreshToken;
     private Long userId;
 
+    private String name;
+
     @Builder
-    public LoginRes(String grantType, String accessToken, Long accessTokenExpiresIn, String refreshToken, String registerStatus, Long userId) {
+    public LoginRes(String grantType, String accessToken, Long accessTokenExpiresIn, String refreshToken, String name, Long userId) {
         this.grantType = grantType;
         this.accessToken = accessToken;
         this.accessTokenExpiresIn = accessTokenExpiresIn;
         this.refreshToken = refreshToken;
         this.userId = userId;
+        this.name = name;
     }
 }
