@@ -136,7 +136,7 @@ class UserServiceTest {
                 .id(1L)
                 .username(postUserReq.getId())
                 .password(passwordEncoder.encode(postUserReq.getPassword()))
-                .email(postUserReq.getEmail())
+                .name(postUserReq.getName())
                 .build();
     }
 
