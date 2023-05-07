@@ -82,7 +82,7 @@ class UserServiceTest {
         //given
         PostUserReq postUserReq = createSignupUserReq();
         User user = createUserEntity(postUserReq);
-        TokenDto fakeToken = new TokenDto("","accessToken",1L,"","");
+        TokenDto fakeToken = new TokenDto("","accessToken",1L,"");
 
         //mocking
         given(userRepository.save(any()))
