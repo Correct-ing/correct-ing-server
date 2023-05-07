@@ -48,6 +48,7 @@ public class SecurityConfig {
 
                 .and()
                 .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.OPTIONS, "/**/*").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
                 .requestMatchers( "/api/v1/users/login").permitAll()
                 .requestMatchers( "/api/v1/users/{loginId}/exists").permitAll()
