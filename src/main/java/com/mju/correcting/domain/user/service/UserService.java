@@ -19,6 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
@@ -48,6 +50,7 @@ public class UserService {
                 .username(postUserReq.getId())
                 .password(encodePassword)
                 .email(postUserReq.getEmail())
+                .roles(Collections.singletonList("ROLE_USER"))
                 .build()).getId();
 
     }
@@ -62,6 +65,7 @@ public class UserService {
     /*
      * 로그인
      * */
+    @Transactional
     public LoginRes loginUser(LoginUserReq loginUserReq) {
 
         User user = userRepository.findByUsername(loginUserReq.getId())
@@ -85,7 +89,6 @@ public class UserService {
         return LoginRes.builder()
                 .accessToken(token.getAccessToken())
                 .refreshToken(token.getRefreshToken())
-                .registerStatus(token.getRegisterStatus())
                 .accessTokenExpiresIn(token.getAccessTokenExpiresIn())
                 .grantType(token.getGrantType())
                 .userId(user.getId())

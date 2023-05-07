@@ -10,7 +10,6 @@ public class LoginRes {
     private String accessToken;
     private Long accessTokenExpiresIn;
     private String refreshToken;
-    private String registerStatus;
     private Long userId;
 
     @Builder
@@ -19,7 +18,6 @@ public class LoginRes {
         this.accessToken = accessToken;
         this.accessTokenExpiresIn = accessTokenExpiresIn;
         this.refreshToken = refreshToken;
-        this.registerStatus = registerStatus;
         this.userId = userId;
     }
 }
