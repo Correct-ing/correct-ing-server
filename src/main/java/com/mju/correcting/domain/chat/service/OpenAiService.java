@@ -3,6 +3,7 @@ package com.mju.correcting.domain.chat.service;
 import com.mju.correcting.domain.chat.Category;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,7 +16,8 @@ import java.util.regex.Pattern;
 
 @Service
 public class OpenAiService {
-    private static final String API_KEY = "sk-";
+    @Value("${gpt.secret}")
+    private String API_KEY;
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
 
     public String getCompletion(String prompt) {

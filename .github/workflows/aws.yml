@@ -20,6 +20,13 @@ jobs:
           java-version: 17
           distribution: corretto
 
+      - name: Set application.yml file
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: 'src/main/resources/application.yml'
+        env:
+          gpt.secret: ${{secrets.GPT_SECRET}}
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
         shell: bash
