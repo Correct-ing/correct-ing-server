@@ -1,5 +1,6 @@
 package com.mju.correcting.domain.weakness.domain;
 
+import com.mju.correcting.domain.chat.Category;
 import com.mju.correcting.domain.user.domain.User;
 import com.mju.correcting.global.common.BaseEntity;
 import jakarta.persistence.*;
@@ -25,7 +26,7 @@ public class Weakness extends BaseEntity {
 
     @Column(length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
-    private WeaknessType weaknessType;
+    private Category category;
 
     @Column(length = 50, nullable = false)
     private String wrongSentence;

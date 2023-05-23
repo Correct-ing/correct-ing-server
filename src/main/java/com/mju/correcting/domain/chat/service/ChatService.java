@@ -1,12 +1,18 @@
 package com.mju.correcting.domain.chat.service;
 
 import com.mju.correcting.domain.chat.Category;
-import com.mju.correcting.domain.chat_log.domain.ChatLog;
-import com.mju.correcting.domain.chat_log.repository.ChatLogRepository;
+import com.mju.correcting.domain.chat.domain.ChatLog;
+import com.mju.correcting.domain.chat.dto.GetChatsRes;
+import com.mju.correcting.domain.chat.repository.ChatLogRepository;
 import com.mju.correcting.domain.chat_room.domain.ChatRoom;
 import com.mju.correcting.domain.chat_room.repository.ChatRoomRepository;
+import com.mju.correcting.domain.user.domain.User;
+import com.mju.correcting.domain.user.repository.UserRepository;
+import com.mju.correcting.domain.weakness.domain.Weakness;
+import com.mju.correcting.domain.weakness.repository.WeaknessRepository;
 import com.mju.correcting.global.common.error.BaseCode;
 import com.mju.correcting.global.common.exception.CustomException;
+import com.mju.correcting.global.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,19 +25,21 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
-public class OpenAiService {
+public class ChatService {
     @Value("${gpt.secret}")
     private String API_KEY;
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
     private final ChatLogRepository chatLogRepository;
     private final ChatRoomRepository chatRoomRepository;
+    private final WeaknessRepository weaknessRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public String getCompletion(Long chatRoomId, String prompt) {
@@ -90,18 +98,45 @@ public class OpenAiService {
                 String found = matcher.group(1);
                 try {
                     Category category = Category.valueOf(found);
-                    //todo: 카테고리별 처리
+
+                    User user = userRepository.findByUsername(SecurityUtil.getCurrentUserName())
+                            .orElseThrow(() -> new CustomException(BaseCode.UNSIGN_USERNAME_OR_PHONE));
+
+                    weaknessRepository.save(Weakness.builder()
+                            .category(category)
+                            .user(user)
+                            .wrongSentence(prompt)
+                            .correctSentence(content)
+                            .build());
+
                 } catch (IllegalArgumentException e) {
-                    //todo: 예외처리
                 }
             }
 
             // chat_log에 저장
+            chatLogRepository.save(ChatLog.builder()
+                    .chatRoom(chatRoom)
+                    .question(prompt)
+                    .answer(content)
+                    .build());
+
             return content;
         } else {
             throw new RuntimeException("Failed to call OpenAI API: " + response.getStatusCode());
         }
     }
+
+    public List<GetChatsRes> getChats(Long chatRoomId) {
+        ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId)
+                .orElseThrow(() -> new CustomException(BaseCode.NOT_FOUND_CHATROOM));
+
+        List<ChatLog> chatLogs = chatLogRepository.findByChatRoom(chatRoom);
+
+        return chatLogs.stream()
+                .map(GetChatsRes::new)
+                .collect(Collectors.toList());
+    }
+
 
     private boolean isEnglish(String text) {
         Pattern englishPattern = Pattern.compile("[A-Za-z0-9.,?!'\" ]+");

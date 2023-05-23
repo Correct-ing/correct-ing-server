@@ -1,7 +1,7 @@
 package com.mju.correcting.domain.chat_room.domain;
 
 
-import com.mju.correcting.domain.chat_log.domain.ChatLog;
+import com.mju.correcting.domain.chat.domain.ChatLog;
 import com.mju.correcting.domain.user.domain.Interest;
 import com.mju.correcting.domain.user.domain.User;
 import com.mju.correcting.global.common.BaseEntity;
