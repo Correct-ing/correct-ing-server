@@ -43,7 +43,7 @@ public class OpenAiService {
         previousMessages.add("우리는 특정상황에 맞춰서 영어 대화를 하고 있는 중이야. 틀린 경우, 답변 앞에 []안에 [품사, 어순, 형식, 시제, 화법, 접속법, 부정문, 불규칙 활용, 구식문법] 이 9가지중 어디인지 적어주면 돼. 그리고 수정해줘. 예를 들어, [어순] I would like to order a hamburger. 맞았을 경우, [정답] 이라고 적어주고 답변 해줘!");
 
         ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId).orElseThrow(() -> new CustomException(BaseCode.NOT_FOUND_CHATROOM));
-        previousMessages.add("우리의 대화주제는" + chatRoom.getInterest());
+        previousMessages.add("우리의 대화주제는" + chatRoom.getInterest().name());
 
         List<ChatLog> byChatRoomId = chatLogRepository.findFirst3ByChatRoomId(chatRoomId);
         byChatRoomId.forEach(chatLog -> previousMessages.add(chatLog.getQuestion()));
