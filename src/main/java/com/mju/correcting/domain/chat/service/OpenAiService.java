@@ -1,33 +1,52 @@
 package com.mju.correcting.domain.chat.service;
 
 import com.mju.correcting.domain.chat.Category;
+import com.mju.correcting.domain.chat_log.domain.ChatLog;
+import com.mju.correcting.domain.chat_log.repository.ChatLogRepository;
+import com.mju.correcting.domain.chat_room.domain.ChatRoom;
+import com.mju.correcting.domain.chat_room.repository.ChatRoomRepository;
+import com.mju.correcting.global.common.error.BaseCode;
+import com.mju.correcting.global.common.exception.CustomException;
+import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 @Service
 public class OpenAiService {
     @Value("${gpt.secret}")
     private String API_KEY;
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
+    private final ChatLogRepository chatLogRepository;
+    private final ChatRoomRepository chatRoomRepository;
 
-    public String getCompletion(String prompt) {
+    @Transactional
+    public String getCompletion(Long chatRoomId, String prompt) {
         RestTemplate restTemplate = new RestTemplate();
 
         // 프롬프트 설정 + 이전 대화 상황
         List<String> previousMessages = new ArrayList<>();
 
-            previousMessages.add("우리는 특정상황에 맞춰서 영어 대화를 하고 있는 중이야. 틀린 경우, 답변 앞에 []안에 [품사, 어순, 형식, 시제, 화법, 접속법, 부정문, 불규칙 활용, 구식문법] 이 9가지중 어디인지 적어주면 돼. 그리고 수정해줘. 예를 들어, [어순] I would like to order a hamburger. 맞았을 경우, [정답] 이라고 적어주고 답변 해줘!");
-        previousMessages.add("우리는 패스트 푸드에서 대화중이야");
+        previousMessages.add("우리는 특정상황에 맞춰서 영어 대화를 하고 있는 중이야. 틀린 경우, 답변 앞에 []안에 [품사, 어순, 형식, 시제, 화법, 접속법, 부정문, 불규칙 활용, 구식문법] 이 9가지중 어디인지 적어주면 돼. 그리고 수정해줘. 예를 들어, [어순] I would like to order a hamburger. 맞았을 경우, [정답] 이라고 적어주고 답변 해줘!");
+
+        ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId).orElseThrow(() -> new CustomException(BaseCode.NOT_FOUND_CHATROOM));
+        previousMessages.add("우리의 대화주제는" + chatRoom.getInterest());
+
+        List<ChatLog> byChatRoomId = chatLogRepository.findFirst3ByChatRoomId(chatRoomId);
+        byChatRoomId.forEach(chatLog -> previousMessages.add(chatLog.getQuestion()));
 
         // 영어 필터링
         if (!isEnglish(prompt)) {
