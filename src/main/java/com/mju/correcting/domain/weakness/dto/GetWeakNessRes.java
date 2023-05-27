@@ -1,25 +1,21 @@
 package com.mju.correcting.domain.weakness.dto;
 
+import com.mju.correcting.domain.chat.Category;
 import com.mju.correcting.domain.weakness.domain.Weakness;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class GetWeakNessRes {
-    private int total;
 
-    private List<WeaknessRes> weaknessList;
+    private Map<Category, Integer> weaknessCounts;
+    private Map<Category, Double> weaknessPercentages;
 
-    public GetWeakNessRes(List<Weakness> weakness) {
-        this.total = weakness.size();
-        this.weaknessList = weakness.stream()
-                .map(WeaknessRes::new)
-                .collect(Collectors.toList());
-    }
 }
