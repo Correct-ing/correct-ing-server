@@ -1,6 +1,6 @@
-package com.mju.correcting.domain.chat_room.dto;
+package com.mju.correcting.domain.chat.dto;
 
-import com.mju.correcting.domain.chat_room.domain.ChatRoom;
+import com.mju.correcting.domain.chat.domain.ChatRoom;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

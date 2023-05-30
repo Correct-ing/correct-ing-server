@@ -1,7 +1,7 @@
 package com.mju.correcting.domain.chat.repository;
 
 import com.mju.correcting.domain.chat.domain.ChatLog;
-import com.mju.correcting.domain.chat_room.domain.ChatRoom;
+import com.mju.correcting.domain.chat.domain.ChatRoom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
-package com.mju.correcting.domain.chat_room.repository;
+package com.mju.correcting.domain.chat.repository;
 
-import com.mju.correcting.domain.chat_room.domain.ChatRoom;
+import com.mju.correcting.domain.chat.domain.ChatRoom;
 import com.mju.correcting.domain.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

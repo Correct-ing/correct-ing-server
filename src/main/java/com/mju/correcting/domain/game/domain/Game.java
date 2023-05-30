@@ -1,6 +1,5 @@
 package com.mju.correcting.domain.game.domain;
 import com.mju.correcting.domain.game_problem.domain.GameProblem;
-import com.mju.correcting.domain.game_score.domain.GameScore;
 import com.mju.correcting.global.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;

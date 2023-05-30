@@ -1,16 +1,15 @@
-package com.mju.correcting.domain.chat_room.service;
+package com.mju.correcting.domain.chat.service;
 
-import com.mju.correcting.domain.chat_room.domain.ChatRoom;
-import com.mju.correcting.domain.chat_room.dto.ChatRoomRes;
-import com.mju.correcting.domain.chat_room.dto.PostChatRoomReq;
-import com.mju.correcting.domain.chat_room.repository.ChatRoomRepository;
+import com.mju.correcting.domain.chat.domain.ChatRoom;
+import com.mju.correcting.domain.chat.dto.ChatRoomRes;
+import com.mju.correcting.domain.chat.dto.PostChatRoomReq;
+import com.mju.correcting.domain.chat.repository.ChatRoomRepository;
 import com.mju.correcting.domain.user.domain.User;
 import com.mju.correcting.domain.user.repository.UserRepository;
 import com.mju.correcting.global.common.error.BaseCode;
 import com.mju.correcting.global.common.exception.CustomException;
 import com.mju.correcting.global.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

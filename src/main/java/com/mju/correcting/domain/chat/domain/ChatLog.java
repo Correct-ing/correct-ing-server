@@ -1,6 +1,5 @@
 package com.mju.correcting.domain.chat.domain;
 
-import com.mju.correcting.domain.chat_room.domain.ChatRoom;
 import com.mju.correcting.global.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;

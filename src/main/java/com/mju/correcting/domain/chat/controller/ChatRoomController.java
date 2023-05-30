@@ -1,8 +1,8 @@
-package com.mju.correcting.domain.chat_room.controller;
+package com.mju.correcting.domain.chat.controller;
 
-import com.mju.correcting.domain.chat_room.dto.ChatRoomRes;
-import com.mju.correcting.domain.chat_room.dto.PostChatRoomReq;
-import com.mju.correcting.domain.chat_room.service.ChatRoomService;
+import com.mju.correcting.domain.chat.dto.ChatRoomRes;
+import com.mju.correcting.domain.chat.dto.PostChatRoomReq;
+import com.mju.correcting.domain.chat.service.ChatRoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

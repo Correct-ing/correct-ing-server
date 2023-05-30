@@ -1,4 +1,4 @@
-package com.mju.correcting.domain.game_score.domain;
+package com.mju.correcting.domain.game.domain;
 
 import com.mju.correcting.domain.game.domain.Game;
 import com.mju.correcting.domain.user.domain.User;

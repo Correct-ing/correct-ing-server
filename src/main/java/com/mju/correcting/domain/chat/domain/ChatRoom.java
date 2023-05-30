@@ -1,4 +1,4 @@
-package com.mju.correcting.domain.chat_room.domain;
+package com.mju.correcting.domain.chat.domain;
 
 
 import com.mju.correcting.domain.chat.domain.ChatLog;
