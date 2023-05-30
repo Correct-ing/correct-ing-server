@@ -1,5 +1,4 @@
 package com.mju.correcting.domain.game.domain;
-import com.mju.correcting.domain.game_problem.domain.GameProblem;
 import com.mju.correcting.global.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,9 +26,6 @@ public class Game extends BaseEntity{
 
     @Column(length = 30, nullable = false)
     private String name;
-
-    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
-    private List<GameProblem> gameProblems = new ArrayList<>();
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
     private List<GameScore> gameScore = new ArrayList<>();
