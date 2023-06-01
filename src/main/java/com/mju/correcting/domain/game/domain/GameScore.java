@@ -23,7 +23,6 @@ public class GameScore extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-
     @Column
     private Integer score;
 }

@@ -67,7 +67,8 @@ public enum BaseCode {
      * Push
      **/
     FAILED_PUSH(500, "P001", "푸시알림 보내기 실패"),
-    NOT_FOUND_CHATROOM(500, "CR001","채팅방이 존재하지 않습니다." );
+    NOT_FOUND_CHATROOM(500, "CR001","채팅방이 존재하지 않습니다." ),
+    NOT_FOUND_SCORE(500, "S001","점수가 존재하지 않습니다.");
 
     private final String code;
     private final String message;
