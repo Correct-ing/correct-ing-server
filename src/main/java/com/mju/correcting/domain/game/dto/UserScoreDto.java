@@ -10,8 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class GetScore {
+public class UserScoreDto {
     private Long id;
     private int score;
-    private int rank;
+    private String name;
+    public UserScoreDto(GameScore gameScore) {
+        this.id = gameScore.getId();
+        this.score = gameScore.getScore();
+        this.name = gameScore.getUser().getUsername();
+    }
 }

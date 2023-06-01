@@ -2,6 +2,7 @@ package com.mju.correcting.domain.game.service;
 
 import com.mju.correcting.domain.game.domain.GameScore;
 import com.mju.correcting.domain.game.dto.GetScore;
+import com.mju.correcting.domain.game.dto.UserScoreDto;
 import com.mju.correcting.domain.game.repository.GameScoreRepository;
 import com.mju.correcting.domain.user.domain.User;
 import com.mju.correcting.domain.user.repository.UserRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -50,5 +52,13 @@ public class GameScoreService {
             }
         }
         return null;
+    }
+
+    public List<UserScoreDto> getScores() {
+        List<GameScore> score = gameScoreRepository.findAll(Sort.by(Sort.Direction.DESC, "score"));
+
+        return score.stream()
+                .map(UserScoreDto::new)
+                .collect(Collectors.toList());
     }
 }
