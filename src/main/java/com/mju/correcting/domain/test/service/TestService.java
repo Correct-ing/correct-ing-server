@@ -29,6 +29,7 @@ public class TestService {
                 .orElseThrow(() -> new CustomException(BaseCode.UNSIGN_USERNAME_OR_PHONE));
 
         testRepository.save(Test.builder()
+                .category(postTestReq.getCategory())
                 .answer(postTestReq.getAnswer())
                 .question(postTestReq.getQuestion())
                 .userAnswer(postTestReq.getUserAnswer())
